@@ -1,1 +1,62 @@
 
+name: Automatski manifest skripti
+
+on:
+  push:
+    paths:
+      - "skripte/**/*.pdf"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Preuzmi repozitorij
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Napravi manifest iz PDF-ova
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          scripts_dir = Path("skripte")
+          files = []
+
+          for pdf in sorted(scripts_dir.rglob("*.pdf")):
+              relative_path = pdf.as_posix()
+
+              files.append({
+                  "filename": pdf.name,
+                  "path": relative_path,
+                  "title": pdf.stem.replace("-", " ").replace("_", " ")
+              })
+
+          manifest = {"files": files}
+
+          output = scripts_dir / "manifest.json"
+          output.write_text(
+              json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8"
+          )
+          PY
+
+      - name: Spremi novi manifest u GitHub
+        run: |
+          if git diff --quiet -- skripte/manifest.json; then
+            echo "Manifest je već ažuran."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add skripte/manifest.json
+          git commit -m "Automatsko ažuriranje manifesta skripti"
+          git push

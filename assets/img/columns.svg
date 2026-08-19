@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 900" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="columnGradDark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(180,190,210,0.35)"/>
+      <stop offset="100%" stop-color="rgba(180,190,210,0.12)"/>
+    </linearGradient>
+
+    <linearGradient id="columnGradLight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(90,110,140,0.28)"/>
+      <stop offset="100%" stop-color="rgba(90,110,140,0.08)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Tijelo stupa -->
+  <rect x="20" y="40" width="100" height="820" rx="10" fill="none" stroke="url(#columnGradDark)" stroke-width="2"/>
+
+  <!-- Kapit (vrh stupa) -->
+  <path d="M30,60 Q70,30 110,60 L110,90 Q70,70 30,90 Z" fill="none" stroke="url(#columnGradDark)" stroke-width="2"/>
+
+  <!-- Baza (dno stupa) -->
+  <path d="M30,830 Q70,860 110,830 L110,800 Q70,820 30,800 Z" fill="none" stroke="url(#columnGradDark)" stroke-width="2"/>
+
+  <!-- Vertikalne linije (kanelure) -->
+  <path d="M40,90 L40,800 M60,90 L60,800 M80,90 L80,800 M100,90 L100,800" stroke="url(#columnGradDark)" stroke-width="1.2" stroke-dasharray="4,6"/>
+
+  <!-- Dekorativni pravni motivi (suptilni) -->
+  <g opacity="0.25" stroke="url(#columnGradDark)" stroke-width="1.4" fill="none">
+    <!-- Vaga (Justitia) -->
+    <circle cx="70" cy="220" r="18"/>
+    <path d="M52,220 L88,220 M70,202 L70,238"/>
+    <path d="M52,220 Q52,235 60,240 M88,220 Q88,235 80,240"/>
+
+    <!-- Čekić -->
+    <rect x="58" y="340" width="24" height="8" rx="2"/>
+    <rect x="68" y="348" width="4" height="24" rx="1"/>
+
+    <!-- Štit / pravni simbol -->
+    <path d="M70,460 L85,475 L80,505 Q70,515 60,505 L55,475 Z"/>
+    <path d="M70,460 L70,490 M60,480 L80,480"/>
+
+    <!-- Knjiga / kodeks -->
+    <rect x="50" y="600" width="40" height="28" rx="3"/>
+    <path d="M70,600 L70,628 M54,614 L86,614"/>
+  </g>
+</svg>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta
+    name="description"
+    content="Codex PFZG — studentska baza materijala Pravnog fakulteta u Zagrebu."
+  >
+  <title>Codex PFZG</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+
+<body class="home-page">
+  <div class="bg" aria-hidden="true">
+    <i></i>
+    <i></i>
+    <i></i>
+  </div>
+
+  <div class="loader" id="loader" aria-label="Učitavanje">
+    <div class="scales" aria-hidden="true">
+      <div class="pole"></div>
+      <div class="base"></div>
+      <div class="beam"></div>
+      <div class="chain chain-left"></div>
+      <div class="chain chain-right"></div>
+      <div class="pan pan-l"></div>
+      <div class="pan pan-r"></div>
+    </div>
+    <p>Učitavanje Codexa</p>
+  </div>
+
+  <header class="hero-header">
+    <a href="index.html" class="logo" aria-label="Codex PFZG — početna">
+      Codex <strong>PFZG</strong>
+    </a>
+
+    <button id="theme" type="button">Light mode</button>
+  </header>
+
+  <main class="home">
+    <section class="hero reveal">
+      <small>STUDENTSKA BAZA MATERIJALA</small>
+
+      <p class="materials-count">
+        PREKO <strong id="materialsNumber">0</strong> materijala i
+        <strong id="viewsNumber">0</strong> pregleda
+      </p>
+
+      <h1>
+        Odaberi svoju<br>
+        <mark>godinu studija.</mark>
+      </h1>
+    </section>
+
+    <section
+      class="years-stack"
+      id="yearsStack"
+      aria-label="Odabir godine studija"
+    >
+      <a class="tile year-tile" href="godina.html?g=1">
+        <h2>Prva godina</h2>
+        <span>Otvori →</span>
+      </a>
+
+      <a class="tile year-tile" href="godina.html?g=2">
+        <h2>Druga godina</h2>
+        <span>Otvori →</span>
+      </a>
+
+      <a class="tile year-tile" href="godina.html?g=3">
+        <h2>Treća godina</h2>
+        <span>Otvori →</span>
+      </a>
+
+      <a class="tile year-tile" href="godina.html?g=4">
+        <h2>Četvrta godina</h2>
+        <span>Otvori →</span>
+      </a>
+
+      <a class="tile year-tile" href="godina.html?g=5">
+        <h2>Peta godina</h2>
+        <span>Otvori →</span>
+      </a>
+    </section>
+  </main>
+
+  <button class="upload" id="openUpload" type="button">
+    <b aria-hidden="true">+</b>
+    <span>DODAJ SVOJE MATERIJALE</span>
+  </button>
+
+  <div class="modal" id="uploadModal" hidden>
+    <section role="dialog" aria-modal="true" aria-labelledby="uploadTitle">
+      <button
+        class="close"
+        id="closeUpload"
+        type="button"
+        aria-label="Zatvori"
+      >
+        ×
+      </button>
+
+      <small>DOPRINESI ZAJEDNICI</small>
+      <h2 id="uploadTitle">Pošalji skriptu</h2>
+
+      <p>
+        Ovdje možeš predati skriptu ili drugi korisni materijal za kolege.
+        Materijali prolaze kratku provjeru prije objave.
+      </p>
+
+      <a
+        href="https://drive.google.com/drive/folders/1NnOHMCV-QW9jxUa-kllPBidd97KLshSi?usp=sharing"
+        target="_blank"
+        rel="noopener"
+      >
+        Predaj materijale na Google Drive
+      </a>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <footer class="site-footer">
+    <div class="footer-left">
+      © <span id="year"></span> Codex PFZG
+    </div>
+
+    <div class="footer-right">
+      <a href="uvjeti.html" class="footer-legal-link">
+        Pravne napomene
+      </a>
+    </div>
+  </footer>
+
+  <script src="supabase-config.js?v=1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js?v=1" defer></script>
+</body>
+</html>

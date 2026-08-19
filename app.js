@@ -693,19 +693,38 @@ function setupSubjectPage() {
 async function init() {
   try {
     setupGlobalUi();
-    await setupSupabase();
+
     const files = await loadManifest();
     attachManifestFiles(files);
+
+    try {
+      await setupSupabase();
+    } catch (error) {
+      console.warn('Supabase trenutačno nije dostupan:', error);
+    }
+
     initYearsAnimation();
 
-    const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
+    const isHome =
+      window.location.pathname.endsWith('index.html') ||
+      window.location.pathname === '/' ||
+      window.location.pathname === '';
+
     if (isHome) {
-      await sendPageView('home');
-      const totalViews = await getPageViewsCount('home');
-      const viewsNumberEl = $('#viewsNumber');
-      if (viewsNumberEl) animateNumber(viewsNumberEl, totalViews, 1200);
       const materialsNumberEl = $('#materialsNumber');
-      if (materialsNumberEl) animateNumber(materialsNumberEl, 150, 1200);
+      if (materialsNumberEl) {
+        animateNumber(materialsNumberEl, files.length, 1200);
+      }
+
+      if (db) {
+        await sendPageView('home');
+
+        const totalViews = await getPageViewsCount('home');
+        const viewsNumberEl = $('#viewsNumber');
+        if (viewsNumberEl) {
+          animateNumber(viewsNumberEl, totalViews, 1200);
+        }
+      }
     }
 
     if ($('#mainList')) setupYearPage();

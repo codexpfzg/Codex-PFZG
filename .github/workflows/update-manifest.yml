@@ -1,10 +1,13 @@
-
 name: Automatski manifest skripti
 
 on:
   push:
     paths:
       - "skripte/**/*.pdf"
+      - "skripte/**/*.docx"
+      - "skripte/**/*.doc"
+      - "skripte/**/*.pptx"
+      - "skripte/**/*.ppt"
   workflow_dispatch:
 
 permissions:
@@ -20,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Napravi manifest iz PDF-ova
+      - name: Napravi manifest iz materijala
         run: |
           python3 - <<'PY'
           import json
@@ -29,25 +32,40 @@ jobs:
           scripts_dir = Path("skripte")
           files = []
 
-          for pdf in sorted(scripts_dir.rglob("*.pdf")):
-              relative_path = pdf.as_posix()
+          allowed_extensions = {
+              ".pdf",
+              ".docx",
+              ".doc",
+              ".pptx",
+              ".ppt"
+          }
+
+          for material in sorted(scripts_dir.rglob("*")):
+              if not material.is_file():
+                  continue
+
+              if material.suffix.lower() not in allowed_extensions:
+                  continue
 
               files.append({
-                  "filename": pdf.name,
-                  "path": relative_path,
-                  "title": pdf.stem.replace("-", " ").replace("_", " ")
+                  "filename": material.name,
+                  "path": material.as_posix(),
+                  "title": material.stem.replace("-", " ").replace("_", " ")
               })
 
-          manifest = {"files": files}
-
           output = scripts_dir / "manifest.json"
+
           output.write_text(
-              json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+              json.dumps(
+                  {"files": files},
+                  ensure_ascii=False,
+                  indent=2
+              ) + "\n",
               encoding="utf-8"
           )
           PY
 
-      - name: Spremi novi manifest u GitHub
+      - name: Spremi manifest u repozitorij
         run: |
           if git diff --quiet -- skripte/manifest.json; then
             echo "Manifest je već ažuran."

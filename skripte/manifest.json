@@ -1,6 +1,11 @@
 {
   "files": [
     {
+      "filename": "g1-hrvatska-povijest-CEPULA_2.pdf",
+      "path": "skripte/g1-hrvatska-povijest-CEPULA_2.pdf",
+      "title": "g1 hrvatska povijest CEPULA 2"
+    },
+    {
       "filename": "g1-hrvatska-povijest-CEPULO_MT.pdf",
       "path": "skripte/g1-hrvatska-povijest-CEPULO_MT.pdf",
       "title": "g1 hrvatska povijest CEPULO MT"
@@ -14,6 +19,11 @@
       "filename": "g1-hrvatska-povijest-KOSNICA_MT.pdf",
       "path": "skripte/g1-hrvatska-povijest-KOSNICA_MT.pdf",
       "title": "g1 hrvatska povijest KOSNICA MT"
+    },
+    {
+      "filename": "g1-hrvatska-povijest-PROSLA_PITANJA.pdf",
+      "path": "skripte/g1-hrvatska-povijest-PROSLA_PITANJA.pdf",
+      "title": "g1 hrvatska povijest PROSLA PITANJA"
     },
     {
       "filename": "g1-hrvatska-povijest-SVA_PITANJA_KVIZOVI_KOLOKVIJI_ISPITI.pdf",
@@ -31,6 +41,11 @@
       "title": "g1 hrvatska povijest VELIKA SKRIPTA"
     },
     {
+      "filename": "g1-opca-povijest-PITANJA_S_PREZENTACIJA.pdf",
+      "path": "skripte/g1-opca-povijest-PITANJA_S_PREZENTACIJA.pdf",
+      "title": "g1 opca povijest PITANJA S PREZENTACIJA"
+    },
+    {
       "filename": "g1-opca-povijest-SKRIPTA-PRAVOKUTNIK.pdf",
       "path": "skripte/g1-opca-povijest-SKRIPTA-PRAVOKUTNIK.pdf",
       "title": "g1 opca povijest SKRIPTA PRAVOKUTNIK"
@@ -41,6 +56,11 @@
       "title": "g1 opca povijest SVI KOLOKVIJI"
     },
     {
+      "filename": "g1-opca-povijest-UCI_ZA_USMENI.pdf",
+      "path": "skripte/g1-opca-povijest-UCI_ZA_USMENI.pdf",
+      "title": "g1 opca povijest UCI ZA USMENI"
+    },
+    {
       "filename": "g1-politicka-ekonomija-SKRACENA-SKRIPTA.pdf",
       "path": "skripte/g1-politicka-ekonomija-SKRACENA-SKRIPTA.pdf",
       "title": "g1 politicka ekonomija SKRACENA SKRIPTA"
@@ -49,6 +69,11 @@
       "filename": "g1-politicka-ekonomija-VELIKA_SKRIPTA+ISPITI.pdf",
       "path": "skripte/g1-politicka-ekonomija-VELIKA_SKRIPTA+ISPITI.pdf",
       "title": "g1 politicka ekonomija VELIKA SKRIPTA+ISPITI"
+    },
+    {
+      "filename": "g1-rimsko-ISPITI-ODOGOVRENI.pdf",
+      "path": "skripte/g1-rimsko-ISPITI-ODOGOVRENI.pdf",
+      "title": "g1 rimsko ISPITI ODOGOVRENI"
     },
     {
       "filename": "g1-rimsko-JARAMAZ-PREZE.pdf",
@@ -66,6 +91,11 @@
       "title": "g1 rimsko LATINSKI POJMOVI"
     },
     {
+      "filename": "g1-rimsko-MILOTIC-PITANJA.pdf",
+      "path": "skripte/g1-rimsko-MILOTIC-PITANJA.pdf",
+      "title": "g1 rimsko MILOTIC PITANJA"
+    },
+    {
       "filename": "g1-rimsko-Ponavljanje-gradiva.pdf",
       "path": "skripte/g1-rimsko-Ponavljanje-gradiva.pdf",
       "title": "g1 rimsko Ponavljanje gradiva"
@@ -76,9 +106,34 @@
       "title": "g1 rimsko SKRIPTA VELIKA(SVE) HORVAT ema"
     },
     {
+      "filename": "g1-rimsko-SKRIPTA-ZA-PISMENI-SAMO-NAJVAZNIJE.pdf",
+      "path": "skripte/g1-rimsko-SKRIPTA-ZA-PISMENI-SAMO-NAJVAZNIJE.pdf",
+      "title": "g1 rimsko SKRIPTA ZA PISMENI SAMO NAJVAZNIJE"
+    },
+    {
+      "filename": "g1-rimsko-Skupljeni-esjeski-zadaci-stvarno+obvezno.pdf",
+      "path": "skripte/g1-rimsko-Skupljeni-esjeski-zadaci-stvarno+obvezno.pdf",
+      "title": "g1 rimsko Skupljeni esjeski zadaci stvarno+obvezno"
+    },
+    {
+      "filename": "g1-rimsko-odgovori-za-usmeni.pdf",
+      "path": "skripte/g1-rimsko-odgovori-za-usmeni.pdf",
+      "title": "g1 rimsko odgovori za usmeni"
+    },
+    {
       "filename": "g1-rimsko-skripta-za-ponoviti.pdf",
       "path": "skripte/g1-rimsko-skripta-za-ponoviti.pdf",
       "title": "g1 rimsko skripta za ponoviti"
+    },
+    {
+      "filename": "g1-seminar-LITERATURA!!.pdf",
+      "path": "skripte/g1-seminar-LITERATURA!!.pdf",
+      "title": "g1 seminar LITERATURA!!"
+    },
+    {
+      "filename": "g1-seminar-Upute_za_izradu_pisanog_rada_doc._dr._sc._Held.pdf",
+      "path": "skripte/g1-seminar-Upute_za_izradu_pisanog_rada_doc._dr._sc._Held.pdf",
+      "title": "g1 seminar Upute za izradu pisanog rada doc. dr. sc. Held"
     },
     {
       "filename": "g1-sociologija-SKRIPTA-NOVA.pdf",
@@ -91,9 +146,54 @@
       "title": "g1 sociologija Stara skripta"
     },
     {
+      "filename": "g1-sociologija-drugi-kolokvij-1.pdf",
+      "path": "skripte/g1-sociologija-drugi-kolokvij-1.pdf",
+      "title": "g1 sociologija drugi kolokvij 1"
+    },
+    {
+      "filename": "g1-sociologija-drugi-kolokvij-MT.pdf",
+      "path": "skripte/g1-sociologija-drugi-kolokvij-MT.pdf",
+      "title": "g1 sociologija drugi kolokvij MT"
+    },
+    {
+      "filename": "g1-strani-1-2-EFL1_DRUGI_KOLOKVIJ.pdf",
+      "path": "skripte/g1-strani-1-2-EFL1_DRUGI_KOLOKVIJ.pdf",
+      "title": "g1 strani 1 2 EFL1 DRUGI KOLOKVIJ"
+    },
+    {
+      "filename": "g1-strani-1-2-EFL2_Revision_I.pdf",
+      "path": "skripte/g1-strani-1-2-EFL2_Revision_I.pdf",
+      "title": "g1 strani 1 2 EFL2 Revision I"
+    },
+    {
+      "filename": "g1-strani-1-2-EFL2_Revision_II.pdf",
+      "path": "skripte/g1-strani-1-2-EFL2_Revision_II.pdf",
+      "title": "g1 strani 1 2 EFL2 Revision II"
+    },
+    {
+      "filename": "g1-teorija-SKRIPTA.pdf",
+      "path": "skripte/g1-teorija-SKRIPTA.pdf",
+      "title": "g1 teorija SKRIPTA"
+    },
+    {
+      "filename": "g1-teorija-skupljeni-kvizovi-1.pdf",
+      "path": "skripte/g1-teorija-skupljeni-kvizovi-1.pdf",
+      "title": "g1 teorija skupljeni kvizovi 1"
+    },
+    {
       "filename": "g1-teorija-skupljeni-kvizovi-2.pdf",
       "path": "skripte/g1-teorija-skupljeni-kvizovi-2.pdf",
       "title": "g1 teorija skupljeni kvizovi 2"
+    },
+    {
+      "filename": "g2-ekonomska-politika-Skripta_članci.pdf",
+      "path": "skripte/g2-ekonomska-politika-Skripta_članci.pdf",
+      "title": "g2 ekonomska politika Skripta članci"
+    },
+    {
+      "filename": "g2-europsko-javno-SKRIPTA_NP.pdf",
+      "path": "skripte/g2-europsko-javno-SKRIPTA_NP.pdf",
+      "title": "g2 europsko javno SKRIPTA NP"
     },
     {
       "filename": "g2-europsko-javno-SKRIPTA_VELIKA.pdf",
@@ -106,6 +206,11 @@
       "title": "g2 europsko javno SKRIPTA ZA PONAVLJANJE"
     },
     {
+      "filename": "g2-europsko-javno-Tablica_presuda.pdf",
+      "path": "skripte/g2-europsko-javno-Tablica_presuda.pdf",
+      "title": "g2 europsko javno Tablica presuda"
+    },
+    {
       "filename": "g2-kazneno-KAZNENO_VELIKA_SKRIPTA-SVE.pdf",
       "path": "skripte/g2-kazneno-KAZNENO_VELIKA_SKRIPTA-SVE.pdf",
       "title": "g2 kazneno KAZNENO VELIKA SKRIPTA SVE"
@@ -116,14 +221,34 @@
       "title": "g2 kazneno MANJA SKRIPTA"
     },
     {
+      "filename": "g2-kazneno-OPCI_DIO(2).pdf",
+      "path": "skripte/g2-kazneno-OPCI_DIO(2).pdf",
+      "title": "g2 kazneno OPCI DIO(2)"
+    },
+    {
       "filename": "g2-kazneno-POSEBNI_DIO_SKRIPTA.pdf",
       "path": "skripte/g2-kazneno-POSEBNI_DIO_SKRIPTA.pdf",
       "title": "g2 kazneno POSEBNI DIO SKRIPTA"
     },
     {
+      "filename": "g2-kazneno-UCI_ZA_USMENI_i_PISMENI.pdf",
+      "path": "skripte/g2-kazneno-UCI_ZA_USMENI_i_PISMENI.pdf",
+      "title": "g2 kazneno UCI ZA USMENI i PISMENI"
+    },
+    {
+      "filename": "g2-kazneno-USMENI_PITANJA.pdf",
+      "path": "skripte/g2-kazneno-USMENI_PITANJA.pdf",
+      "title": "g2 kazneno USMENI PITANJA"
+    },
+    {
       "filename": "g2-obiteljsko-SKRIPTA-BEKS.pdf",
       "path": "skripte/g2-obiteljsko-SKRIPTA-BEKS.pdf",
       "title": "g2 obiteljsko SKRIPTA BEKS"
+    },
+    {
+      "filename": "g2-obiteljsko-SVA_PITANJA.pdf",
+      "path": "skripte/g2-obiteljsko-SVA_PITANJA.pdf",
+      "title": "g2 obiteljsko SVA PITANJA"
     },
     {
       "filename": "g2-obiteljsko-SVI_ISPITIKOL.pdf",
@@ -146,6 +271,11 @@
       "title": "g2 pit SKRIPTA(SVE) KOMBO"
     },
     {
+      "filename": "g2-pit-SVA_PITANJA_USMENI.pdf",
+      "path": "skripte/g2-pit-SVA_PITANJA_USMENI.pdf",
+      "title": "g2 pit SVA PITANJA USMENI"
+    },
+    {
       "filename": "g2-strani-3-4-ENG_III.pdf",
       "path": "skripte/g2-strani-3-4-ENG_III.pdf",
       "title": "g2 strani 3 4 ENG III"
@@ -154,6 +284,11 @@
       "filename": "g2-ustavno-LEKCIJE-PREDAVANJA.pdf",
       "path": "skripte/g2-ustavno-LEKCIJE-PREDAVANJA.pdf",
       "title": "g2 ustavno LEKCIJE PREDAVANJA"
+    },
+    {
+      "filename": "g2-ustavno-PITANJA-SVI-ISPITIVACI.pdf",
+      "path": "skripte/g2-ustavno-PITANJA-SVI-ISPITIVACI.pdf",
+      "title": "g2 ustavno PITANJA SVI ISPITIVACI"
     },
     {
       "filename": "g2-ustavno-VELIKA_SKRIPTA-pesimist.pdf",
@@ -176,6 +311,16 @@
       "title": "g3 financijsko USMENI SVI"
     },
     {
+      "filename": "g3-gradjansko-1-KATALOZI-ZNANJA_ODGOVORENO.pdf",
+      "path": "skripte/g3-gradjansko-1-KATALOZI-ZNANJA_ODGOVORENO.pdf",
+      "title": "g3 gradjansko 1 KATALOZI ZNANJA ODGOVORENO"
+    },
+    {
+      "filename": "g3-gradjansko-1-MATANOVAC.pdf",
+      "path": "skripte/g3-gradjansko-1-MATANOVAC.pdf",
+      "title": "g3 gradjansko 1 MATANOVAC"
+    },
+    {
       "filename": "g3-gradjansko-1-SKRIPTA-LEO!.pdf",
       "path": "skripte/g3-gradjansko-1-SKRIPTA-LEO!.pdf",
       "title": "g3 gradjansko 1 SKRIPTA LEO!"
@@ -184,6 +329,11 @@
       "filename": "g3-gradjansko-1-SVI_PISMENI.pdf",
       "path": "skripte/g3-gradjansko-1-SVI_PISMENI.pdf",
       "title": "g3 gradjansko 1 SVI PISMENI"
+    },
+    {
+      "filename": "g3-gradjansko-1-USMENI-ODGOVORI.pdf",
+      "path": "skripte/g3-gradjansko-1-USMENI-ODGOVORI.pdf",
+      "title": "g3 gradjansko 1 USMENI ODGOVORI"
     },
     {
       "filename": "g3-gradjansko-2-SKRIPTA-LM!.pdf",
@@ -201,6 +351,11 @@
       "title": "g3 gradjansko 2 SKRIPTA STVARNO LEO"
     },
     {
+      "filename": "g3-gradjansko-2-nasljedstvo.pdf",
+      "path": "skripte/g3-gradjansko-2-nasljedstvo.pdf",
+      "title": "g3 gradjansko 2 nasljedstvo"
+    },
+    {
       "filename": "g3-kazneno-procesno-INSTITUCIJE-SKRIPTA.pdf",
       "path": "skripte/g3-kazneno-procesno-INSTITUCIJE-SKRIPTA.pdf",
       "title": "g3 kazneno procesno INSTITUCIJE SKRIPTA"
@@ -209,6 +364,11 @@
       "filename": "g3-kazneno-procesno-SKRIPTA-LM!.pdf",
       "path": "skripte/g3-kazneno-procesno-SKRIPTA-LM!.pdf",
       "title": "g3 kazneno procesno SKRIPTA LM!"
+    },
+    {
+      "filename": "g3-medjunarodno-RUSAN-SERŠIĆ.pdf",
+      "path": "skripte/g3-medjunarodno-RUSAN-SERŠIĆ.pdf",
+      "title": "g3 medjunarodno RUSAN SERŠIĆ"
     },
     {
       "filename": "g3-medjunarodno-SKRIPTA-LEO(SVE).pdf",
@@ -239,6 +399,11 @@
       "filename": "g3-medjunarodno-odgovorena-pitanja-3dio.pdf",
       "path": "skripte/g3-medjunarodno-odgovorena-pitanja-3dio.pdf",
       "title": "g3 medjunarodno odgovorena pitanja 3dio"
+    },
+    {
+      "filename": "g3-medjunarodno-odgovorena-pitanja-usmeni.pdf",
+      "path": "skripte/g3-medjunarodno-odgovorena-pitanja-usmeni.pdf",
+      "title": "g3 medjunarodno odgovorena pitanja usmeni"
     },
     {
       "filename": "g3-medjunarodno-odgovorene-kartice.pdf",

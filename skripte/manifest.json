@@ -1,3 +1,49 @@
 {
-  "files": []
+  "files": [
+    {
+      "filename": "g1-politicka-ekonomija-VELIKA_SKRIPTA+ISPITI.pdf",
+      "path": "skripte/g1-politicka-ekonomija-VELIKA_SKRIPTA+ISPITI.pdf",
+      "title": "g1 politicka ekonomija VELIKA SKRIPTA+ISPITI"
+    },
+    {
+      "filename": "g1-rimsko-SKRIPTA-VELIKA(SVE)-HORVAT-ema.pdf",
+      "path": "skripte/g1-rimsko-SKRIPTA-VELIKA(SVE)-HORVAT-ema.pdf",
+      "title": "g1 rimsko SKRIPTA VELIKA(SVE) HORVAT ema"
+    },
+    {
+      "filename": "g2-kazneno-KAZNENO_VELIKA_SKRIPTA-SVE.pdf",
+      "path": "skripte/g2-kazneno-KAZNENO_VELIKA_SKRIPTA-SVE.pdf",
+      "title": "g2 kazneno KAZNENO VELIKA SKRIPTA SVE"
+    },
+    {
+      "filename": "g2-kazneno-MANJA_SKRIPTA.pdf",
+      "path": "skripte/g2-kazneno-MANJA_SKRIPTA.pdf",
+      "title": "g2 kazneno MANJA SKRIPTA"
+    },
+    {
+      "filename": "g2-obiteljsko-SVI_ISPITIKOL.pdf",
+      "path": "skripte/g2-obiteljsko-SVI_ISPITIKOL.pdf",
+      "title": "g2 obiteljsko SVI ISPITIKOL"
+    },
+    {
+      "filename": "g3-gradjansko-2-SKRIPTA-LM!.pdf",
+      "path": "skripte/g3-gradjansko-2-SKRIPTA-LM!.pdf",
+      "title": "g3 gradjansko 2 SKRIPTA LM!"
+    },
+    {
+      "filename": "g3-gradjansko-2-SKRIPTA-STVARNO-LEO.pdf",
+      "path": "skripte/g3-gradjansko-2-SKRIPTA-STVARNO-LEO.pdf",
+      "title": "g3 gradjansko 2 SKRIPTA STVARNO LEO"
+    },
+    {
+      "filename": "g3-medjunarodno-SKRIPTA-LEO(SVE).pdf",
+      "path": "skripte/g3-medjunarodno-SKRIPTA-LEO(SVE).pdf",
+      "title": "g3 medjunarodno SKRIPTA LEO(SVE)"
+    },
+    {
+      "filename": "g3-medjunarodno-SKRIPTA-VELIKA.pdf",
+      "path": "skripte/g3-medjunarodno-SKRIPTA-VELIKA.pdf",
+      "title": "g3 medjunarodno SKRIPTA VELIKA"
+    }
+  ]
 }

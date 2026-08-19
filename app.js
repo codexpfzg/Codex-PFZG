@@ -705,7 +705,7 @@ async function init() {
       const viewsNumberEl = $('#viewsNumber');
       if (viewsNumberEl) animateNumber(viewsNumberEl, totalViews, 1200);
       const materialsNumberEl = $('#materialsNumber');
-      if (materialsNumberEl) animateNumber(materialsNumberEl, 60, 1200);
+      if (materialsNumberEl) animateNumber(materialsNumberEl, 150, 1200);
     }
 
     if ($('#mainList')) setupYearPage();

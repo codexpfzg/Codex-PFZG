@@ -68,11 +68,20 @@
   <script>
     const admin = {};
 
+    try {
+      const savedTheme = localStorage.getItem('skriptomat_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.body.classList.toggle('light', savedTheme === 'light');
+    } catch {}
+
     (function init() {
       const supa = window.supabaseConfig ? window.supabaseConfig() : null;
       if (supa) {
         admin.supa = supa;
         checkSession();
+      } else {
+        const m = document.getElementById('login-message');
+        if (m) m.innerHTML = 'Supabase nije konfiguriran. Otvori datoteku <strong>supabase-config.js</strong> i u nju upiši svoj <strong>SUPABASE_URL</strong> i <strong>SUPABASE_PUBLISHABLE_KEY</strong> (Dashboard > Project Settings > API), zatim pokreni <strong>supabase-setup.sql</strong> u SQL Editoru i osvježi stranicu.';
       }
     })();
 
@@ -126,7 +135,6 @@
         .select('id, subject_id, file_name, storage_path, author_nickname, submitted_at, status')
         .eq('status', 'pending')
         .order('submitted_at', { ascending: true });
-      const list = document.getElementById('admin-list');
       list.innerHTML = '';
       if (error) {
         list.innerHTML = '<li><div class="card"><p>Nije uspjelo učitavanje predaja.</p></div></li>';
@@ -176,8 +184,11 @@
 
     document.getElementById('theme').addEventListener('click', () => {
       const t = document.documentElement.getAttribute('data-theme');
-      document.documentElement.setAttribute('data-theme', t === 'dark' ? 'light' : 'dark');
-      document.getElementById('theme').textContent = t === 'dark' ? 'Light mode' : 'Dark mode';
+      const next = t === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      document.body.classList.toggle('light', next === 'light');
+      try { localStorage.setItem('skriptomat_theme', next); } catch {}
+      document.getElementById('theme').textContent = next === 'light' ? 'Dark mode' : 'Light mode';
     });
 
     document.querySelectorAll('.reveal').forEach(element => element.classList.add('show'));

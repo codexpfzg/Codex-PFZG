@@ -107,7 +107,7 @@ async function getPageViewsCount(pageName) {
 
 function initYearsAnimation() {
   if (!document.body.classList.contains('home-page')) return;
-  setTimeout(() => document.body.classList.add('loaded'), 1800);
+  requestAnimationFrame(() => document.body.classList.add('loaded'));
 }
 
 function initFooterYear() {
@@ -189,6 +189,10 @@ function hideLoader() {
 
 function setTheme(mode) {
   document.documentElement.setAttribute('data-theme', mode);
+  document.body.classList.toggle('light', mode === 'light');
+  try {
+    localStorage.setItem(STORAGE.theme, mode);
+  } catch {}
   const button = $('#theme');
   if (button) button.textContent = mode === 'light' ? 'Dark mode' : 'Light mode';
 }
@@ -995,6 +999,7 @@ async function init() {
     setupGlobalUi();
     setupCookieBanner();
     setupUploadForm();
+    initYearsAnimation();
 
     const files = await loadManifest();
     attachManifestFiles(files);
@@ -1007,8 +1012,6 @@ async function init() {
 
     const approved = await loadApprovedSubmissions();
     attachManifestFiles(approved);
-
-    initYearsAnimation();
 
     const isHome =
       window.location.pathname.endsWith('index.html') ||

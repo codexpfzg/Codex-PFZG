@@ -31,16 +31,23 @@
     <div id="auth-section" class="block reveal">
       <small>CODEX PFZG</small>
       <h2>Prijava</h2>
-      <p>Unesite svoj e-mail za pristup ovoj stranici. Poslat će vam se poveznica za prijavu.</p>
-      <form id="login-form" style="margin-top:1.2rem">
+      <p>Prijavite se administratorskim e-mailom i lozinkom.</p>
+      <form id="login-form" style="margin-top:1.2rem;max-width:360px">
         <input
           type="email"
           id="email-input"
           placeholder="admin@email.com"
           required
-          style="width:100%;max-width:360px;padding:0.7rem 0.9rem;border-radius:8px;border:1px solid var(--border);background:var(--bg-primary);color:var(--text-primary)"
+          style="width:100%;padding:0.7rem 0.9rem;border-radius:8px;border:1px solid var(--border);background:var(--bg-primary);color:var(--text-primary)"
         >
-        <button type="submit" class="btn-cta" style="margin-top:0.9rem">Pošalji prijavu</button>
+        <input
+          type="password"
+          id="password-input"
+          placeholder="Lozinka"
+          required
+          style="width:100%;margin-top:0.6rem;padding:0.7rem 0.9rem;border-radius:8px;border:1px solid var(--border);background:var(--bg-primary);color:var(--text-primary)"
+        >
+        <button type="submit" class="btn-cta" style="margin-top:0.9rem">Prijavi se</button>
         <p id="login-message" style="margin-top:0.9rem;color:var(--text-secondary)"></p>
       </form>
     </div>
@@ -48,9 +55,12 @@
     <div id="admin-section" class="block reveal" style="display:none">
       <small>CODEX PFZG</small>
       <h2>Skripte čekaju odobrenje</h2>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.4rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.4rem;gap:0.6rem;flex-wrap:wrap">
         <p style="color:var(--text-secondary)">Pregledajte nove prijedloge i objavite ih ili odbijte.</p>
-        <button id="refresh-btn" type="button" class="btn-ghost">Osvježi</button>
+        <div style="display:flex;gap:0.5rem">
+          <button id="refresh-btn" type="button" class="btn-ghost">Osvježi</button>
+          <button id="logout-btn" type="button" class="btn-ghost">Odjava</button>
+        </div>
       </div>
       <ul id="admin-list" class="list" style="margin-top:1.4rem"></ul>
     </div>
@@ -85,10 +95,25 @@
       }
     })();
 
+    const ADMIN_EMAIL = 'Ipintar03@gmail.com';
+
     function checkSession() {
       admin.supa.auth.getSession().then(({ data }) => {
-        if (data.session) showAdmin();
+        if (data.session) handleAuth(data.session);
       });
+    }
+
+    function handleAuth(session) {
+      const email = session.user.email;
+      if (email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+        admin.supa.auth.signOut();
+        const m = document.getElementById('login-message');
+        m.textContent = 'Ovaj račun nema administratorski pristup.';
+        document.getElementById('admin-section').style.display = 'none';
+        document.getElementById('auth-section').style.display = '';
+        return;
+      }
+      showAdmin();
     }
 
     function showAdmin() {
@@ -99,27 +124,33 @@
 
     document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
+      const m = document.getElementById('login-message');
       if (!admin.supa) {
-        document.getElementById('login-message').textContent =
-          'Supabase nije konfiguriran. Dovrši postavak u uputama.';
+        m.textContent = 'Supabase nije konfiguriran. Postavi URL i key u supabase-config.js i pokreni supabase-setup.sql.';
         return;
       }
       const email = document.getElementById('email-input').value.trim();
+      const password = document.getElementById('password-input').value;
+      m.textContent = '';
       try {
-        const { error } = await admin.supa.auth.signInWithOtp({ email, options: { emailRedirectTo: location.href } });
-        const m = document.getElementById('login-message');
+        const { error } = await admin.supa.auth.signInWithPassword({ email, password });
         if (error) {
-          m.textContent = 'Neuspjelo slanje: ' + error.message;
-        } else {
-          m.textContent = 'Provjeri e-mail i klikni poveznicu za prijavu.';
+          m.textContent = 'Neuspjela prijava: ' + error.message;
         }
       } catch (err) {
-        document.getElementById('login-message').textContent = 'Greška: ' + err.message;
+        m.textContent = 'Greška: ' + err.message;
       }
     });
 
     admin.supa && admin.supa.auth.onAuthStateChange((_event, session) => {
-      if (session) showAdmin();
+      if (session) handleAuth(session);
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      if (admin.supa) await admin.supa.auth.signOut();
+      document.getElementById('admin-section').style.display = 'none';
+      document.getElementById('auth-section').style.display = '';
+      document.getElementById('login-message').textContent = '';
     });
 
     document.getElementById('refresh-btn').addEventListener('click', loadSubmissions);

@@ -253,26 +253,71 @@ function setupReveal() {
   setTimeout(() => reveals.forEach(el => el.classList.add('show')), 3000);
 }
 
-function setupHeaderScroll() {
-  const header = document.querySelector('.hero-header');
-  if (!header) return;
-  let lastY = window.scrollY;
-  let ticking = false;
+function setupYearsBackground() {
+  const stack = document.getElementById('yearsStack');
+  if (!stack) return;
+  const tiles = stack.querySelectorAll('.year-tile');
   const update = () => {
-    const y = window.scrollY;
-    if (y < 8) {
-      header.classList.remove('header-hidden');
-    } else if (y > lastY + 4 && !header.classList.contains('header-hidden')) {
-      header.classList.add('header-hidden');
-    } else if (y < lastY - 4 && header.classList.contains('header-hidden')) {
-      header.classList.remove('header-hidden');
-    }
-    lastY = y;
-    ticking = false;
+    const g = stack.getBoundingClientRect();
+    stack.style.setProperty('--stack-height', g.height + 'px');
+    tiles.forEach(tile => {
+      const top = tile.getBoundingClientRect().top - g.top;
+      tile.style.setProperty('--tile-top', top + 'px');
+    });
   };
-  window.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(update); ticking = true; }
-  }, { passive: true });
+  update();
+  window.addEventListener('resize', update);
+  setTimeout(update, 300);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(update);
+}
+
+function setupFluidTabs() {
+  document.querySelectorAll('.tabs:not(.form-tabs)').forEach(group => {
+    if (group.dataset.fluidReady) return;
+    group.dataset.fluidReady = '1';
+    group.classList.add('tabs-fluid');
+    const indicator = document.createElement('span');
+    indicator.className = 'tab-indicator';
+    group.appendChild(indicator);
+    const buttons = () => group.querySelectorAll('button[data-type]');
+    let first = true;
+    const place = (btn) => {
+      if (!btn) return;
+      const r = btn.getBoundingClientRect();
+      const g = group.getBoundingClientRect();
+      const toX = r.left - g.left;
+      const fromX = parseFloat(indicator.dataset.x || String(toX));
+      indicator.style.width = r.width + 'px';
+      if (first) {
+        indicator.dataset.x = String(toX);
+        indicator.style.transform = `translateX(${toX}px)`;
+        first = false;
+        return;
+      }
+      const dir = toX >= fromX ? 'right' : 'left';
+      indicator.style.setProperty('--from-x', fromX + 'px');
+      indicator.style.setProperty('--to-x', toX + 'px');
+      indicator.style.transformOrigin = dir === 'right' ? 'left center' : 'right center';
+      indicator.style.animation = 'none';
+      void indicator.offsetWidth;
+      indicator.style.animation = 'liquidFlow .46s cubic-bezier(.22,1.12,.32,1) forwards';
+      indicator.dataset.x = String(toX);
+    };
+    requestAnimationFrame(() => place(group.querySelector('button.active[data-type]') || buttons()[0]));
+    const mo = new MutationObserver(() => place(group.querySelector('button.active[data-type]')));
+    buttons().forEach(b => mo.observe(b, { attributes: true, attributeFilter: ['class'] }));
+    window.addEventListener('resize', () => {
+      const a = group.querySelector('button.active[data-type]');
+      if (!a) return;
+      const r = a.getBoundingClientRect();
+      const g = group.getBoundingClientRect();
+      const toX = r.left - g.left;
+      indicator.style.animation = 'none';
+      indicator.style.width = r.width + 'px';
+      indicator.style.transform = `translateX(${toX}px)`;
+      indicator.dataset.x = String(toX);
+    });
+  });
 }
 
 function setupCookieBanner() {
@@ -325,13 +370,31 @@ function extractSubjectId(filename) {
 
 function attachManifestFiles(files) {
   const subjects = allSubjects();
+  const ids = subjects.map(item => item.id).sort((a, b) => b.length - a.length);
   files.forEach(file => {
-    const id = file.subjectId || extractSubjectId(file.filename || '');
+    const filename = String(file.filename || '');
+    const lower = filename.toLowerCase();
+    let id = file.subjectId;
+    let category = file.category === 'pitanja' ? 'pitanja' : 'skripte';
+    let name = file.title || filename.replace(/\.pdf$/i, '');
+    if (!id) {
+      for (const subjectId of ids) {
+        const usmeniPrefix = subjectId.replace(/^g(\d)/, 'g$1u');
+        if (lower === `${usmeniPrefix}.pdf` || lower.startsWith(`${usmeniPrefix}-`) || lower.startsWith(`${usmeniPrefix}_`)) {
+          id = subjectId;
+          category = 'pitanja';
+          name = filename.slice(usmeniPrefix.length).replace(/^[-_]/, '').replace(/\.pdf$/i, '').replace(/[-_]/g, ' ').trim();
+          break;
+        }
+      }
+      if (!id) {
+        const matchId = ids.find(subjectId => lower === `${subjectId}.pdf` || lower.startsWith(`${subjectId}-`) || lower.startsWith(`${subjectId}_`));
+        if (matchId) id = matchId;
+      }
+    }
     if (!id || !file.path) return;
     const target = subjects.find(item => item.id === id);
     if (!target) return;
-    const name = file.title || String(file.filename).replace(/\.pdf$/i, '');
-    const category = file.category === 'pitanja' ? 'pitanja' : 'skripte';
     const exists = target.files.some(f => f.path === file.path || (f.name === name && f.category === category));
     if (exists) return;
     target.files.push({
@@ -538,11 +601,11 @@ async function buildFileRecord(file) {
 
 function displayTitle(file, subjectId) {
   let name = String(file.name);
-  const prefix = subjectId ? `${subjectId}-` : '';
-  if (prefix && name.toLowerCase().startsWith(prefix.toLowerCase())) {
-    name = name.slice(prefix.length);
+  if (subjectId) {
+    const escaped = subjectId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/-/g, '[-_ ]');
+    name = name.replace(new RegExp('^' + escaped + '[-_ ]+', 'i'), '');
   }
-  name = name.replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
+  name = name.replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
   return escapeHtml(name);
 }
 
@@ -1056,12 +1119,13 @@ function setupSubjectPage() {
 async function init() {
   try {
     setupGlobalUi();
-    setupHeaderScroll();
     setupReveal();
     setupAdSlot();
     setupCookieBanner();
     setupUploadForm();
     initYearsAnimation();
+    setupYearsBackground();
+    setupFluidTabs();
 
     const files = await loadManifest();
     attachManifestFiles(files);

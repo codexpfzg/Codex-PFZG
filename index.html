@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta
     name="description"
-    content="Codex PFZG — odaberi predmete za svoju godinu studija."
+    content="Codex PFZG je anonimna studentska baza materijala za učenje Pravnog fakulteta u Zagrebu. Skripte, pitanja po profesorima i iskustva s ispitnih rokova, na jednom mjestu."
   >
-  <title>Codex PFZG — Godina</title>
+  <title>Codex PFZG</title>
 
   <link rel="icon" type="image/jpeg" href="assets/img/ICO.jpg">
   <link rel="apple-touch-icon" href="assets/img/ICO.jpg">
@@ -20,9 +20,10 @@
   >
 
   <link rel="stylesheet" href="style.css?v=2">
+  <meta name="google-site-verification" content="1pBeTyFB-55VaffSI-8hgq4cFYqqdbtyqihisgjvjLg" />
 </head>
 
-<body>
+<body class="home-page">
   <div class="bg" aria-hidden="true">
     <i></i>
     <i></i>
@@ -39,12 +40,10 @@
       <div class="pan pan-l"></div>
       <div class="pan pan-r"></div>
     </div>
-    <p>Učitavanje predmeta</p>
+    <p>Učitavanje Codexa</p>
   </div>
 
   <header class="hero-header">
-    <a href="index.html" class="back">← Natrag</a>
-
     <a href="index.html" class="logo" aria-label="Codex PFZG — početna">
       Codex <strong>PFZG</strong>
     </a>
@@ -52,30 +51,50 @@
     <button id="theme" type="button">Light mode</button>
   </header>
 
-  <main class="page">
-    <section class="heading reveal">
-      <h1 id="title">I. godina</h1>
+  <main class="home">
+    <section class="hero reveal">
+      <small>STUDENTSKA BAZA MATERIJALA</small>
+
+      <p class="materials-count">
+        PREKO <strong id="materialsNumber">0</strong>+ materijala i
+        <strong id="viewsNumber">0</strong> pregleda
+      </p>
+
+      <h1>
+        Odaberi svoju<br>
+        <mark>godinu studija.</mark>
+      </h1>
     </section>
 
-    <section class="search reveal">
-      <label>
-        Pretraži predmete, profesore ili skripte
-        <input
-          id="search"
-          type="search"
-          placeholder="Upiši naziv predmeta, profesora ili skripte…"
-        >
-      </label>
-    </section>
+    <section
+      class="years-stack"
+      id="yearsStack"
+      aria-label="Odabir godine studija"
+    >
+      <a class="tile year-tile" href="godina.html?g=1">
+        <h2>Prva godina</h2>
+        <span>Otvori →</span>
+      </a>
 
-    <section class="group reveal" id="mainGroup">
-      <small>PREDMET</small>
-      <div id="mainList" class="subjects"></div>
-    </section>
+      <a class="tile year-tile" href="godina.html?g=2">
+        <h2>Druga godina</h2>
+        <span>Otvori →</span>
+      </a>
 
-    <section class="group reveal" id="otherGroup" hidden>
-      <small id="otherGroupLabel">OSTALO</small>
-      <div id="otherList" class="subjects"></div>
+      <a class="tile year-tile" href="godina.html?g=3">
+        <h2>Treća godina</h2>
+        <span>Otvori →</span>
+      </a>
+
+      <a class="tile year-tile" href="godina.html?g=4">
+        <h2>Četvrta godina</h2>
+        <span>Otvori →</span>
+      </a>
+
+      <a class="tile year-tile" href="godina.html?g=5">
+        <h2>Peta godina</h2>
+        <span>Otvori →</span>
+      </a>
     </section>
   </main>
 
@@ -86,14 +105,24 @@
 
   <div class="modal" id="uploadModal" hidden>
     <section role="dialog" aria-modal="true" aria-labelledby="uploadTitle">
-      <button class="close" id="closeUpload" type="button" aria-label="Zatvori">×</button>
+      <button
+        class="close"
+        id="closeUpload"
+        type="button"
+        aria-label="Zatvori"
+      >
+        ×
+      </button>
+
       <small>DOPRINESI ZAJEDNICI</small>
       <h2 id="uploadTitle">Pošalji skriptu</h2>
+
       <p>
         Ovdje možeš predati skriptu ili drugi korisni materijal za kolege.
         Materijal se objavljuje na stranici tek kad ga administrator pregleda
         i odobri.
       </p>
+
       <div class="composer">
         <label>Predmet
           <select id="uploadSubject"></select>
@@ -120,16 +149,32 @@
 
   <div class="toast" id="toast" hidden></div>
 
-  <div class="page-spacer" aria-hidden="true"></div>
+  <aside class="cookie-banner" id="cookieBanner" hidden>
+    <p>
+      Codex PFZG poštuje tvoju privatnost. Prikupljamo isključivo tehničke podatke
+      potrebne za rad stranice (anonimni identifikator, broj pregleda i preuzimanja)
+      te koristimo kolačiće za pamćenje postavki. Svi komentari i iskustva su
+      anonimni. Neki podaci se obrađuju u Supabase servisu. Saznaj više u politici
+      privatnosti.
+    </p>
+    <div class="cookie-buttons">
+      <a href="uvjeti.html#politika-privatnosti">Saznaj više</a>
+      <button type="button" id="acceptCookies">Prihvati i zatvori</button>
+    </div>
+  </aside>
 
   <div class="ad-slot" id="adSlot" aria-label="Oglasni prostor"></div>
 
-  <footer class="site-footer-simple">
-    Korištenjem stranice Codex PFZG prihvaćate Uvjete korištenja &amp; zaštitu privatnosti.
-    Codex PFZG je neovisna, neslužbena studentska platforma i ne odgovara
-    za točnost, potpunost ni zakonitost objavljenih skripti i materijala.
-    Svi sadržaji su isključivo informativnog karaktera i ne zamjenjuju
-    službenu literaturu i informacije Pravnog fakulteta u Zagrebu.
+  <footer class="site-footer">
+    <div class="footer-left">
+      © <span id="year"></span> Codex PFZG
+    </div>
+
+    <div class="footer-right">
+      <a href="uvjeti.html" class="footer-legal-link">
+        Uvjeti korištenja &amp; zaštita privatnosti
+      </a>
+    </div>
   </footer>
 
   <script src="supabase-config.js?v=1"></script>

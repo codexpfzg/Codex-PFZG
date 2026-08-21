@@ -9,6 +9,9 @@
   >
   <title>Codex PFZG — Godina</title>
 
+  <link rel="icon" type="image/jpeg" href="assets/img/ICO.jpg">
+  <link rel="apple-touch-icon" href="assets/img/ICO.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -16,7 +19,7 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 
 <body>
@@ -56,11 +59,11 @@
 
     <section class="search reveal">
       <label>
-        Pretraži predmete ili profesore
+        Pretraži predmete, profesore ili skripte
         <input
           id="search"
           type="search"
-          placeholder="Upiši naziv predmeta, profesora…"
+          placeholder="Upiši naziv predmeta, profesora ili skripte…"
         >
       </label>
     </section>
@@ -83,37 +86,42 @@
 
   <div class="modal" id="uploadModal" hidden>
     <section role="dialog" aria-modal="true" aria-labelledby="uploadTitle">
-      <button
-        class="close"
-        id="closeUpload"
-        type="button"
-        aria-label="Zatvori"
-      >
-        ×
-      </button>
-
+      <button class="close" id="closeUpload" type="button" aria-label="Zatvori">×</button>
       <small>DOPRINESI ZAJEDNICI</small>
       <h2 id="uploadTitle">Pošalji skriptu</h2>
-
       <p>
         Ovdje možeš predati skriptu ili drugi korisni materijal za kolege.
-        Materijali prolaze kratku provjeru prije objave.
+        Materijal se objavljuje na stranici tek kad ga administrator pregleda
+        i odobri.
       </p>
-
-      <a
-        href="https://drive.google.com/drive/folders/1NnOHMCV-QW9jxUa-kllPBidd97KLshSi?usp=sharing"
-        target="_blank"
-        rel="noopener"
-      >
-        Predaj materijale na Google Drive
-      </a>
+      <div class="composer">
+        <label>Predmet
+          <select id="uploadSubject"></select>
+        </label>
+        <label>Vrsta materijala
+          <select id="uploadCategory">
+            <option value="skripte">Skripta</option>
+            <option value="pitanja">Pitanja po profesorima</option>
+          </select>
+        </label>
+        <label>Naziv skripte
+          <input type="text" id="uploadName" placeholder="npr. Skripta — kolokvij 1">
+        </label>
+        <label>Datoteka (PDF, najviše 20&nbsp;MB)
+          <input type="file" id="uploadFile" accept="application/pdf">
+        </label>
+        <div class="composerRow">
+          <span class="nick" id="uploadNickDisplay"></span>
+          <button class="btn" id="submitUpload" type="button">Pošalji na provjeru</button>
+        </div>
+      </div>
     </section>
   </div>
 
   <div class="toast" id="toast" hidden></div>
 
   <footer class="site-footer-simple">
-    Korištenjem stranice Codex PFZG prihvaćate Opće uvjete korištenja.
+    Korištenjem stranice Codex PFZG prihvaćate Uvjete korištenja &amp; zaštitu privatnosti.
     Codex PFZG je neovisna, neslužbena studentska platforma i ne odgovara
     za točnost, potpunost ni zakonitost objavljenih skripti i materijala.
     Svi sadržaji su isključivo informativnog karaktera i ne zamjenjuju

@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta
     name="description"
-    content="Codex PFZG — studentska baza materijala Pravnog fakulteta u Zagrebu."
+    content="Codex PFZG je anonimna studentska baza materijala za učenje Pravnog fakulteta u Zagrebu. Skripte, pitanja po profesorima i iskustva s ispitnih rokova, na jednom mjestu."
   >
   <title>Codex PFZG</title>
+
+  <link rel="icon" type="image/jpeg" href="assets/img/ICO.jpg">
+  <link rel="apple-touch-icon" href="assets/img/ICO.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +19,7 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="stylesheet" href="style.css?v=2">
   <meta name="google-site-verification" content="1pBeTyFB-55VaffSI-8hgq4cFYqqdbtyqihisgjvjLg" />
 </head>
 
@@ -116,20 +119,49 @@
 
       <p>
         Ovdje možeš predati skriptu ili drugi korisni materijal za kolege.
-        Materijali prolaze kratku provjeru prije objave.
+        Materijal se objavljuje na stranici tek kad ga administrator pregleda
+        i odobri.
       </p>
 
-      <a
-        href="https://drive.google.com/drive/folders/1NnOHMCV-QW9jxUa-kllPBidd97KLshSi?usp=sharing"
-        target="_blank"
-        rel="noopener"
-      >
-        Predaj materijale na Google Drive
-      </a>
+      <div class="composer">
+        <label>Predmet
+          <select id="uploadSubject"></select>
+        </label>
+        <label>Vrsta materijala
+          <select id="uploadCategory">
+            <option value="skripte">Skripta</option>
+            <option value="pitanja">Pitanja po profesorima</option>
+          </select>
+        </label>
+        <label>Naziv skripte
+          <input type="text" id="uploadName" placeholder="npr. Skripta — kolokvij 1">
+        </label>
+        <label>Datoteka (PDF, najviše 20&nbsp;MB)
+          <input type="file" id="uploadFile" accept="application/pdf">
+        </label>
+        <div class="composerRow">
+          <span class="nick" id="uploadNickDisplay"></span>
+          <button class="btn" id="submitUpload" type="button">Pošalji na provjeru</button>
+        </div>
+      </div>
     </section>
   </div>
 
   <div class="toast" id="toast" hidden></div>
+
+  <aside class="cookie-banner" id="cookieBanner" hidden>
+    <p>
+      Codex PFZG poštuje tvoju privatnost. Prikupljamo isključivo tehničke podatke
+      potrebne za rad stranice (anonimni identifikator, broj pregleda i preuzimanja)
+      te koristimo kolačiće za pamćenje postavki. Svi komentari i iskustva su
+      anonimni. Neki podaci se obrađuju u Supabase servisu. Saznaj više u politici
+      privatnosti.
+    </p>
+    <div class="cookie-buttons">
+      <a href="uvjeti.html#politika-privatnosti">Saznaj više</a>
+      <button type="button" id="acceptCookies">Prihvati i zatvori</button>
+    </div>
+  </aside>
 
   <footer class="site-footer">
     <div class="footer-left">
@@ -138,7 +170,7 @@
 
     <div class="footer-right">
       <a href="uvjeti.html" class="footer-legal-link">
-        Pravne napomene
+        Uvjeti korištenja &amp; zaštita privatnosti
       </a>
     </div>
   </footer>

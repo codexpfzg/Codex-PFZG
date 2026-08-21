@@ -8,6 +8,8 @@
   --muted: #b7c2d3;
   --blue: #7aa9ff;
   --blue2: #4f80ec;
+  --good: #5ad175;
+  --bad: #ef5f5f;
   --shadow: 0 20px 60px rgba(0, 0, 0, .32);
   --r: 24px;
 }
@@ -102,13 +104,8 @@ body {
   }
 }
 
-/* ===========================
-   HEADER
-   =========================== */
-
 .hero-header {
   position: relative;
-  top: auto;
   z-index: 30;
   display: flex;
   align-items: center;
@@ -126,11 +123,11 @@ body {
     url("assets/img/header-bg.jpg");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px) saturate(170%);
 }
 
-/* Veći header na početnoj stranici */
 .home-page .hero-header {
   height: 110px;
   padding: 0 28px;
@@ -184,10 +181,6 @@ body.light #theme {
   background: rgba(255, 255, 255, .60);
 }
 
-/* ===========================
-   LAYOUT
-   =========================== */
-
 .home,
 .page,
 .subjectpage {
@@ -199,18 +192,13 @@ body.light #theme {
   padding: 6vh 0 110px;
 }
 
-/* Veći razmaci na početnoj */
 .home-page .home {
   padding: 8vh 0 140px;
 }
 
 .hero {
   max-width: 700px;
-  margin: 34px 0 46px;
-}
-
-.home-page .hero {
-  margin: 48px auto 60px;
+  margin: 34px auto 46px;
 }
 
 .hero small,
@@ -238,7 +226,6 @@ mark {
   background: transparent;
 }
 
-/* Broj materijala i pregleda */
 .hero .materials-count {
   margin: 0.7rem 0 1.2rem;
   font-size: 0.95rem;
@@ -251,69 +238,32 @@ mark {
   font-weight: 700;
 }
 
-/* ===========================
-   GODINE – SLIDE-IN JEDNA PO JEDNA
-   =========================== */
-
 .years-stack {
   display: flex;
   flex-direction: column;
   gap: 14px;
-}
-
-/* Početna: centrirano */
-.home-page .home {
-  width: min(880px, calc(100% - 28px));
-  margin: 0 auto;
-}
-
-.home-page .hero {
-  max-width: 700px;
-  margin: 34px auto 46px;
-}
-
-.home-page .years-stack {
   max-width: 700px;
   margin: 0 auto;
 }
 
-/* Godine – jedna po jedna, kasniji početak */
-.home-page .year-tile {
+.home-page .years-stack .year-tile {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(26px);
+  transition:
+    opacity .7s ease,
+    transform .7s cubic-bezier(.2, .8, .2, 1);
 }
 
-/* Kasniji početak animacije */
-.home-page.loaded .year-tile:nth-child(1) {
+.home-page.loaded .years-stack .year-tile {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 1.4s;
 }
 
-.home-page.loaded .year-tile:nth-child(2) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 1.7s;
-}
-
-.home-page.loaded .year-tile:nth-child(3) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 2.0s;
-}
-
-.home-page.loaded .year-tile:nth-child(4) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 2.3s;
-}
-
-.home-page.loaded .year-tile:nth-child(5) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 2.6s;
-}
+.home-page.loaded .years-stack .year-tile:nth-child(1) { transition-delay: .10s; }
+.home-page.loaded .years-stack .year-tile:nth-child(2) { transition-delay: .42s; }
+.home-page.loaded .years-stack .year-tile:nth-child(3) { transition-delay: .74s; }
+.home-page.loaded .years-stack .year-tile:nth-child(4) { transition-delay: 1.06s; }
+.home-page.loaded .years-stack .year-tile:nth-child(5) { transition-delay: 1.38s; }
 
 .tile {
   display: flex;
@@ -348,36 +298,25 @@ mark {
   font-weight: 800;
 }
 
-/* Gumbi godina sa slikom – bez bijelih rubova u dark modeu */
 .home-page .tile.year-tile {
   position: relative;
-  isolation: isolate;
+  z-index: 0;
   overflow: hidden;
+  border-radius: var(--r);
   background-color: rgba(23, 31, 50, .48);
   background-image:
-    linear-gradient(135deg, rgba(8, 13, 27, .48), rgba(37, 56, 104, .29)),
-    url("assets/img/header-bg.jpg");
+    linear-gradient(135deg, rgba(8, 13, 27, .52), rgba(37, 56, 104, .32)),
+    url("assets/img/godine-bg.jpg");
+  background-size: cover;
   background-repeat: no-repeat;
-  background-size: 100% 500%;
-  backdrop-filter: blur(8px) saturate(135%);
-  border-radius: var(--r);
+  background-position: center 0%;
 }
 
-/* Tamni overlay da se ne vidi bijelo na rubovima */
-.home-page .tile.year-tile::before {
-  position: absolute;
-  z-index: -1;
-  inset: -12px;
-  content: "";
-  opacity: .96;
-  background-image: inherit;
-  background-repeat: no-repeat;
-  background-size: 100% 500%;
-  background-position: inherit;
-  filter: blur(10px) brightness(0.9);
-  transform: scale(1.06);
-  border-radius: inherit;
-}
+.home-page .years-stack .year-tile:nth-child(1) { background-position: center 0%; }
+.home-page .years-stack .year-tile:nth-child(2) { background-position: center 25%; }
+.home-page .years-stack .year-tile:nth-child(3) { background-position: center 50%; }
+.home-page .years-stack .year-tile:nth-child(4) { background-position: center 75%; }
+.home-page .years-stack .year-tile:nth-child(5) { background-position: center 100%; }
 
 .home-page .tile.year-tile h2,
 .home-page .tile.year-tile span {
@@ -386,43 +325,17 @@ mark {
   text-shadow: 0 2px 18px rgba(0, 0, 0, .60);
 }
 
-.home-page .years-stack .year-tile:nth-child(1) {
-  background-position: center 0%;
-}
-
-.home-page .years-stack .year-tile:nth-child(2) {
-  background-position: center 25%;
-}
-
-.home-page .years-stack .year-tile:nth-child(3) {
-  background-position: center 50%;
-}
-
-.home-page .years-stack .year-tile:nth-child(4) {
-  background-position: center 75%;
-}
-
-.home-page .years-stack .year-tile:nth-child(5) {
-  background-position: center 100%;
-}
-
 .home-page .tile.year-tile:hover {
-  background-color: rgba(36, 51, 82, .34);
   border-color: var(--blue);
+  background-color: rgba(36, 51, 82, .34);
 }
 
-/* Light mode: svjetlija slika + tamniji tekst */
 body.light .home-page .tile.year-tile {
   background-color: rgba(255, 255, 255, .85);
   background-image:
     linear-gradient(135deg, rgba(255, 255, 255, .85), rgba(235, 242, 255, .75)),
-    url("assets/img/header-bg.jpg");
+    url("assets/img/godine-bg.jpg");
   background-blend-mode: screen;
-}
-
-body.light .home-page .tile.year-tile::before {
-  opacity: .55;
-  filter: blur(10px) brightness(1.55) saturate(.9);
 }
 
 body.light .home-page .tile.year-tile h2,
@@ -435,15 +348,10 @@ body.light .home-page .tile.year-tile span {
   color: #0f4cb8;
 }
 
-/* ===========================
-   STUPOVI (SAMO NA UVJETIMA)
-   =========================== */
-
 .roman-columns {
   display: none;
 }
 
-/* Stupovi samo na stranici uvjeti.html */
 .terms-page-body .roman-columns {
   position: fixed;
   z-index: -1;
@@ -487,10 +395,6 @@ body.light .terms-page-body .roman-columns::after {
   background-color: rgba(220, 230, 247, .44);
   box-shadow: inset 0 0 42px rgba(89, 119, 166, .13);
 }
-
-/* ===========================
-   STRANICA GODINE
-   =========================== */
 
 .page {
   padding: 44px 0 100px;
@@ -574,16 +478,13 @@ body.light .terms-page-body .roman-columns::after {
 }
 
 @keyframes difficultSubjectGlow {
-  0%,
-  70%,
-  100% {
+  0%, 70%, 100% {
     border-color: var(--border);
     background-color: var(--card);
     box-shadow: var(--shadow);
   }
 
-  78%,
-  92% {
+  78%, 92% {
     border-color: rgba(245, 117, 117, .52);
     background-color: rgba(130, 45, 55, .20);
     box-shadow: 0 0 0 1px rgba(245, 100, 100, .15), 0 16px 48px rgba(130, 35, 40, .18);
@@ -597,10 +498,6 @@ body.light .terms-page-body .roman-columns::after {
 .subject.difficult:nth-child(2) {
   animation-delay: .55s;
 }
-
-/* ===========================
-   POJEDINI PREDMET
-   =========================== */
 
 .subjectpage {
   padding: 24px 0 105px;
@@ -630,6 +527,19 @@ body.light .terms-page-body .roman-columns::after {
   margin: 8px 0 0;
   font-size: 1.35rem;
   letter-spacing: -.03em;
+}
+
+.subsection {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+.subsection h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  letter-spacing: -.02em;
+  color: var(--text);
 }
 
 .block > div:not(.tabs) {
@@ -676,40 +586,70 @@ body.light .terms-page-body .roman-columns::after {
 }
 
 .votes {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  gap: 0;
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 10px;
 }
 
 .vote-button {
-  padding: 7px 9px;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  color: var(--muted);
   background: transparent;
-  font-size: .92rem;
+  font-size: 1rem;
   line-height: 1;
   cursor: pointer;
+  transition: background .15s, color .15s;
 }
 
-.vote-button.active {
-  border-color: rgba(122, 169, 255, .60);
-  color: var(--blue);
-  background: rgba(122, 169, 255, .16);
+.vote-button:hover {
+  background: rgba(255, 255, 255, .06);
+  color: var(--text);
+}
+
+body.light .vote-button:hover {
+  background: rgba(0, 0, 0, .05);
+}
+
+.vote-button.up.active {
+  color: var(--good);
+  background: rgba(90, 209, 117, .16);
+}
+
+.vote-button.down.active {
+  color: var(--bad);
+  background: rgba(239, 95, 95, .16);
 }
 
 .vote-count {
-  min-width: 18px;
-  color: var(--muted);
-  font-size: .75rem;
-  font-weight: 700;
+  min-width: 30px;
+  padding: 0 6px;
+  color: var(--text);
+  font-size: .78rem;
+  font-weight: 800;
   text-align: center;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  background: rgba(255, 255, 255, .03);
+}
+
+body.light .vote-count {
+  background: rgba(0, 0, 0, .03);
 }
 
 .comment-button,
 .experience-comment-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 8px 12px;
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -724,6 +664,21 @@ body.light .terms-page-body .roman-columns::after {
 .experience-comment-button:hover {
   border-color: var(--blue);
   color: var(--blue);
+}
+
+.comment-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--blue2);
+  font-size: .68rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .empty {
@@ -840,7 +795,6 @@ body.light .terms-page-body .roman-columns::after {
   background: rgba(180, 50, 50, .10);
 }
 
-/* Kartica za unos iskustva. */
 .experience-invite {
   display: flex;
   align-items: center;
@@ -886,7 +840,17 @@ body.light .terms-page-body .roman-columns::after {
   font-weight: 700;
 }
 
-/* Forme i komentari. */
+.publish-rule {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(122, 169, 255, .30);
+  border-radius: 12px;
+  background: rgba(122, 169, 255, .08);
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
 .composer,
 .comment-composer {
   display: grid;
@@ -902,6 +866,7 @@ body.light .terms-page-body .roman-columns::after {
 
 .composer input,
 .composer textarea,
+.composer select,
 .comment-composer textarea {
   display: block;
   width: 100%;
@@ -992,7 +957,6 @@ body.light .terms-page-body .roman-columns::after {
   margin-top: 22px;
 }
 
-/* Upload i modali. */
 .upload {
   position: fixed;
   z-index: 20;
@@ -1048,7 +1012,7 @@ body.light .terms-page-body .roman-columns::after {
 
 .modal section {
   position: relative;
-  width: min(520px, 100%);
+  width: min(560px, 100%);
   padding: 32px;
   border: 1px solid var(--border);
   border-radius: var(--r);
@@ -1111,11 +1075,63 @@ body.light .terms-page-body .roman-columns::after {
   display: none;
 }
 
-/* ===========================
-   FOOTERI
-   =========================== */
+.cookie-banner {
+  position: fixed;
+  z-index: 80;
+  left: 50%;
+  bottom: 18px;
+  width: min(640px, calc(100% - 28px));
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--solid);
+  box-shadow: var(--shadow);
+  transform: translateX(-50%);
+}
 
-/* Footer s linkom na uvjete (index.html) */
+.cookie-banner[hidden] {
+  display: none;
+}
+
+.cookie-banner p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.cookie-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.cookie-buttons a,
+.cookie-buttons button {
+  flex: 1;
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  background: transparent;
+  font-size: .8rem;
+  font-weight: 800;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.cookie-buttons a:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.cookie-buttons button {
+  border-color: var(--blue2);
+  color: #fff;
+  background: var(--blue2);
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -1160,7 +1176,6 @@ body.light .terms-page-body .roman-columns::after {
   }
 }
 
-/* Jednostavan footer bez linka (godina.html, predmet.html) */
 .site-footer-simple {
   max-width: 1100px;
   margin: 2rem auto 1.5rem;
@@ -1171,20 +1186,6 @@ body.light .terms-page-body .roman-columns::after {
   line-height: 1.4;
   border-top: 1px solid var(--border);
 }
-
-/* Stari footer (ako ga negdje još koristiš) */
-footer {
-  width: min(880px, calc(100% - 28px));
-  margin: 0 auto;
-  padding: 24px 0 90px;
-  color: var(--muted);
-  font-size: .72rem;
-  text-align: center;
-}
-
-/* ===========================
-   LOADER
-   =========================== */
 
 .loader {
   position: fixed;
@@ -1296,8 +1297,7 @@ footer {
 }
 
 @keyframes tilt {
-  0%,
-  100% {
+  0%, 100% {
     transform: rotate(-4deg);
   }
 
@@ -1307,8 +1307,7 @@ footer {
 }
 
 @keyframes chainL {
-  0%,
-  100% {
+  0%, 100% {
     transform: rotate(-4deg);
   }
 
@@ -1318,8 +1317,7 @@ footer {
 }
 
 @keyframes chainR {
-  0%,
-  100% {
+  0%, 100% {
     transform: rotate(-4deg);
   }
 
@@ -1329,8 +1327,7 @@ footer {
 }
 
 @keyframes panL {
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0);
   }
 
@@ -1340,8 +1337,7 @@ footer {
 }
 
 @keyframes panR {
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(7px);
   }
 
@@ -1349,10 +1345,6 @@ footer {
     transform: translateY(0);
   }
 }
-
-/* ===========================
-   REVEAL ANIMACIJE
-   =========================== */
 
 .reveal {
   opacity: 0;
@@ -1364,10 +1356,6 @@ footer {
   opacity: 1;
   transform: none;
 }
-
-/* ===========================
-   RESPONSIVE
-   =========================== */
 
 @media (max-width: 1100px) {
   .terms-page-body .roman-columns {
@@ -1402,11 +1390,18 @@ footer {
   }
 
   .hero {
-    margin: 28px 0 36px;
+    margin: 28px auto 36px;
+    text-align: center;
+  }
+
+  .hero small,
+  .hero .materials-count {
+    text-align: center;
   }
 
   .hero h1 {
     font-size: 2.7rem;
+    text-align: center;
   }
 
   .tile {
@@ -1415,7 +1410,7 @@ footer {
 
   .home-page .tile.year-tile {
     min-height: 108px;
-    background-size: auto 500%;
+    background-size: cover;
   }
 
   .material {
@@ -1426,7 +1421,7 @@ footer {
   .material-actions,
   .experience-actions {
     width: 100%;
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .experience-invite {
@@ -1465,44 +1460,10 @@ footer {
     transition: none !important;
   }
 }
-/* Početna: godine se pojavljuju jedna po jedna */
-.home-page .years-stack .year-tile {
-  opacity: 0;
-  transform: translateY(26px);
-  transition:
-    opacity .7s ease,
-    transform .7s cubic-bezier(.2, .8, .2, 1);
-}
 
-.home-page.loaded .years-stack .year-tile {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.home-page.loaded .years-stack .year-tile:nth-child(1) {
-  transition-delay: .10s;
-}
-
-.home-page.loaded .years-stack .year-tile:nth-child(2) {
-  transition-delay: .42s;
-}
-
-.home-page.loaded .years-stack .year-tile:nth-child(3) {
-  transition-delay: .74s;
-}
-
-.home-page.loaded .years-stack .year-tile:nth-child(4) {
-  transition-delay: 1.06s;
-}
-
-.home-page.loaded .years-stack .year-tile:nth-child(5) {
-  transition-delay: 1.38s;
-}
-
-/* Light mode: bijeli tekst na karticama godina */
 body.light.home-page .years-stack .year-tile,
 body.light.home-page .years-stack .year-tile h2,
 body.light.home-page .years-stack .year-tile span {
-  color: #ffffff !important;
+  color: #ffffff;
   text-shadow: 0 2px 14px rgba(0, 0, 0, .82);
 }

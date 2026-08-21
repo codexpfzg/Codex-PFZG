@@ -107,12 +107,17 @@ async function getPageViewsCount(pageName) {
 
 function initYearsAnimation() {
   if (!document.body.classList.contains('home-page')) return;
-  requestAnimationFrame(() => document.body.classList.add('loaded'));
+  setTimeout(() => document.body.classList.add('loaded'), 1000);
 }
 
 function initFooterYear() {
   const yearEl = $('#year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+}
+
+function setupAdSlot() {
+  const adSlot = document.getElementById('adSlot');
+  if (adSlot) adSlot.hidden = !window.ADS_ENABLED;
 }
 
 const STORAGE = { theme: 'skriptomat_theme', nickname: 'skriptomat_nickname', cookie: 'codex_cookie_ok' };
@@ -224,8 +229,50 @@ function setupGlobalUi() {
       document.body.style.overflow = '';
     }
   });
+}
 
-  document.querySelectorAll('.reveal').forEach(element => element.classList.add('show'));
+function setupReveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  if (!reveals.length) return;
+  const isSubjectPage = !!document.querySelector('.subjectpage') || /predmet\.html/.test(location.pathname);
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('show'));
+    return;
+  }
+  let firstBatch = true;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (!entry.isIntersecting) return;
+      const base = firstBatch && isSubjectPage ? 500 : 0;
+      setTimeout(() => entry.target.classList.add('show'), base + i * 90);
+      observer.unobserve(entry.target);
+    });
+    firstBatch = false;
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  reveals.forEach(el => observer.observe(el));
+  setTimeout(() => reveals.forEach(el => el.classList.add('show')), 3000);
+}
+
+function setupHeaderScroll() {
+  const header = document.querySelector('.hero-header');
+  if (!header) return;
+  let lastY = window.scrollY;
+  let ticking = false;
+  const update = () => {
+    const y = window.scrollY;
+    if (y < 8) {
+      header.classList.remove('header-hidden');
+    } else if (y > lastY + 4 && !header.classList.contains('header-hidden')) {
+      header.classList.add('header-hidden');
+    } else if (y < lastY - 4 && header.classList.contains('header-hidden')) {
+      header.classList.remove('header-hidden');
+    }
+    lastY = y;
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
 }
 
 function setupCookieBanner() {
@@ -489,10 +536,22 @@ async function buildFileRecord(file) {
   return { file, votes, downloads, comments };
 }
 
-function renderMaterialCard({ file, votes, downloads, comments }) {
+function displayTitle(file, subjectId) {
+  let name = String(file.name);
+  const prefix = subjectId ? `${subjectId}-` : '';
+  if (prefix && name.toLowerCase().startsWith(prefix.toLowerCase())) {
+    name = name.slice(prefix.length);
+  }
+  name = name.replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
+  return escapeHtml(name);
+}
+
+function renderMaterialCard(record, item) {
+  const { file, votes, downloads, comments } = record;
   const net = votes.up - votes.down;
   const badge = comments > 0 ? `<span class="comment-badge">${comments}</span>` : '';
-  return `<article class="material"><div><h3>${escapeHtml(file.name)}</h3><p>${escapeHtml(file.path.split('/').pop())} · ${downloads} preuzimanja</p></div>
+  const title = displayTitle(file, item && item.id);
+  return `<article class="material"><div><h3>${title}</h3><p>${downloads} preuzimanja</p></div>
     <div class="material-actions"><div class="votes">
       <button class="vote-button up ${votes.mine === 1 ? 'active' : ''}" type="button" data-script-vote="1" data-path="${escapeHtml(file.path)}" title="Sviđa mi se">${ARROW_UP}</button><span class="vote-count">${net}</span>
       <button class="vote-button down ${votes.mine === -1 ? 'active' : ''}" type="button" data-script-vote="-1" data-path="${escapeHtml(file.path)}" title="Ne sviđa mi se">${ARROW_DOWN}</button>
@@ -520,7 +579,7 @@ async function renderFileList(container, files, item) {
   container.innerHTML = '<p class="empty">Učitavanje materijala…</p>';
   const records = await Promise.all(files.map(buildFileRecord));
   records.sort((a, b) => (b.votes.up - b.votes.down) - (a.votes.up - a.votes.down));
-  container.innerHTML = records.map(renderMaterialCard).join('');
+  container.innerHTML = records.map(r => renderMaterialCard(r, item)).join('');
   wireMaterialCard(container, item);
 }
 
@@ -997,6 +1056,9 @@ function setupSubjectPage() {
 async function init() {
   try {
     setupGlobalUi();
+    setupHeaderScroll();
+    setupReveal();
+    setupAdSlot();
     setupCookieBanner();
     setupUploadForm();
     initYearsAnimation();

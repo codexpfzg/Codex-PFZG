@@ -8,6 +8,7 @@ on:
       - "skripte/**/*.doc"
       - "skripte/**/*.pptx"
       - "skripte/**/*.ppt"
+      - "skripte/manifest.json"
   workflow_dispatch:
 
 permissions:
@@ -30,37 +31,46 @@ jobs:
           from pathlib import Path
 
           scripts_dir = Path("skripte")
-          files = []
+          existing = {}
+          old_manifest = scripts_dir / "manifest.json"
+          if old_manifest.exists():
+              try:
+                  old = json.loads(old_manifest.read_text(encoding="utf-8"))
+                  for f in old.get("files", []):
+                      key = f.get("filename") or f.get("path")
+                      if key:
+                          existing[key] = f
+              except Exception:
+                  pass
 
-          allowed_extensions = {
-              ".pdf",
-              ".docx",
-              ".doc",
-              ".pptx",
-              ".ppt"
-          }
+          allowed_extensions = {".pdf", ".docx", ".doc", ".pptx", ".ppt"}
+          files = []
 
           for material in sorted(scripts_dir.rglob("*")):
               if not material.is_file():
                   continue
-
               if material.suffix.lower() not in allowed_extensions:
                   continue
+              if material.name == "manifest.json":
+                  continue
+
+              filename = material.name
+              path = material.as_posix()
+              prev = existing.get(filename) or existing.get(path)
+              if prev and prev.get("title"):
+                  title = prev["title"]
+              else:
+                  title = material.stem.replace("-", " ").replace("_", " ").strip()
 
               files.append({
-                  "filename": material.name,
-                  "path": material.as_posix(),
-                  "title": material.stem.replace("-", " ").replace("_", " ")
+                  "filename": filename,
+                  "path": path,
+                  "title": title
               })
 
           output = scripts_dir / "manifest.json"
-
           output.write_text(
-              json.dumps(
-                  {"files": files},
-                  ensure_ascii=False,
-                  indent=2
-              ) + "\n",
+              json.dumps({"files": files}, ensure_ascii=False, indent=2) + "\n",
               encoding="utf-8"
           )
           PY

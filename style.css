@@ -306,6 +306,8 @@ mark {
   overflow: hidden;
   border-radius: var(--r);
   background-color: rgba(23, 31, 50, .48);
+  -webkit-clip-path: inset(0 round var(--r));
+  clip-path: inset(0 round var(--r));
 }
 
 .home-page .tile.year-tile::before {

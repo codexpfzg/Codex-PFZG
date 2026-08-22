@@ -123,7 +123,7 @@ body {
     linear-gradient(135deg, rgba(8, 12, 26, .78), rgba(35, 50, 100, .50)),
     url("assets/img/header-bg.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center 35%;
   background-repeat: no-repeat;
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px) saturate(170%);
@@ -1446,16 +1446,52 @@ body.light .vote-count {
     min-height: 108px;
   }
 
-  .home-page .tile.year-tile::before {
-    background-size: 100% 500%;
-  }
-
   .material {
-    align-items: flex-start;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 10px;
   }
 
-  .material-actions,
+  .material > div:first-child {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  .material > div:first-child h3,
+  .material > div:first-child p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Break the actions wrapper apart so its children become direct grid
+     items of .material, without touching the HTML/JS that builds them. */
+  .material .material-actions {
+    display: contents;
+  }
+
+  .material .material-actions .votes {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .material .material-actions .comment-button {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+  }
+
+  .material .material-actions a[data-script-download] {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+    text-align: center;
+  }
+
   .experience-actions {
     width: 100%;
     justify-content: center;
